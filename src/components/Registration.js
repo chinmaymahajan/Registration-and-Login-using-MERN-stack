@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import RegistrationService from '../services/RegistrationService';
-import { REGISTRATION_FIELDS } from '../MessageBundle';
+import Message from '../elements/Message';
+import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE } from '../MessageBundle';
 
 export default class Registration extends Component {
 	constructor(props) {
@@ -17,7 +18,7 @@ export default class Registration extends Component {
 			last_name: '',
 			user_name: '',
 			password: '',
-			register: ''
+			register: false
 		}
 	}
 
@@ -54,16 +55,15 @@ export default class Registration extends Component {
 			user_name: this.state.user_name,
 			password: this.state.password
 		};
-		const registerStatus = await RegistrationService(data);
 
-			if(registerStatus === '200') {
-				debugger;
-					this.setState = (state) => ({
+		const registerStatus = await RegistrationService(data);
+			if(registerStatus === 200) {
+					this.setState({
 					first_name: '',
 					last_name: '',
 					user_name: '',
 					password: '',
-					register: 'Registered Successfully'
+					register: true
 				});
 			}
 		}
@@ -85,7 +85,7 @@ export default class Registration extends Component {
 						<button type="button" className="btn btn-link">{ REGISTRATION_FIELDS.CANCEL }</button>
 					</div>
 				</form>
-				{ 'Register props'  + this.state.register }
+				{ register && <Message message={REGISTRATION_MESSAGE} /> }
 			</div>
 		)
 	}

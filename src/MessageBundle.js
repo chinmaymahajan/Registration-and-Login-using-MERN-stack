@@ -7,3 +7,5 @@ export const REGISTRATION_FIELDS = {
 	CANCEL: 'Cancel',
 	REGISTRATION_HEADING: 'Registration'
 }
+
+export const REGISTRATION_MESSAGE = 'Registered Successfully';
