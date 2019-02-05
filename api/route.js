@@ -16,28 +16,19 @@ registrationRoutes.route('/register').post(function (req, res) {
 });
 
 // Login Router
-registrationRoutes.route('/auth').get(function (req, res) {
-	Registration.find({"first_name": req.first_name, "last_name": req.last_name})
-		.then(auth => {
-			res.status(200).json({'Login': 'Login successfully'});
-		})
-		.catch(err => {
-			res.status(400).send("Invalid credentials!!");
-		});
+registrationRoutes.route('/login').post(function (req, res) {
+	Registration.findOne({"user_name": req.body.user_name, "password": req.body.password}, function(err, data) {
+		if(data !== null) res.sendStatus(200);
+		else res.sendStatus(204);
+	});
 });
 
 // Get allData
 registrationRoutes.route('/allData').get(function (req, res) {
-	Registration.find(function(err, data){
-	    if(err){
-	      console.log(err);
-	    }
-	    else {
-	      res.json(data);
-	    }
-	  })
+	Registration.find(function(err, data) {
+			if(err) res.status(400).send("Error occured");
+			else res.json(data);
+		});
 });
-
-
 
 module.exports = registrationRoutes;

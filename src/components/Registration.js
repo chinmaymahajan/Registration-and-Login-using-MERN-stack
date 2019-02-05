@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
 import RegistrationService from '../services/RegistrationService';
+import Login from './Login';
 import Message from '../elements/Message';
-import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE } from '../MessageBundle';
+import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE, COMMON_FIELDS } from '../MessageBundle';
 
 export default class Registration extends Component {
 	constructor(props) {
 		super(props);
+
 		this.handleOnChangeFirstName = this.handleOnChangeFirstName.bind(this);
 		this.handleOnChangeLastName = this.handleOnChangeLastName.bind(this);
 		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
 		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.handleOnCancel = this.handleOnCancel.bind(this);
 
 		this.state = {
 			first_name: '',
 			last_name: '',
 			user_name: '',
 			password: '',
-			register: false
+			register: false,
+			cancel: false
 		}
 	}
 
@@ -63,30 +66,37 @@ export default class Registration extends Component {
 					last_name: '',
 					user_name: '',
 					password: '',
-					register: true
+					register: true,
+					cancel: false
 				});
 			}
 		}
 
-
+		handleOnCancel(e) {
+			this.setState({
+				cancel: true
+			})
+		}
 
 	render() {
-		const { register } = this.state;
+		const { register, cancel } = this.state;
 		return (
+			!cancel ?
 			<div className="Registration">
 				<h1>{ REGISTRATION_FIELDS.REGISTRATION_HEADING }</h1>
 				<form onSubmit={this.onSubmit}>
 					<div>
-						{ REGISTRATION_FIELDS.FIRST_NAME } <input type="text" name="FirstName" onChange={this.handleOnChangeFirstName}/> <br />
-						{ REGISTRATION_FIELDS.LAST_NAME } <input type="text" name="LastName" onChange={this.handleOnChangeLastName}/> <br />
-						{ REGISTRATION_FIELDS.USER_NAME } <input type="text" name="Username" onChange={this.handleOnChangeUserName}/> <br />
-						{ REGISTRATION_FIELDS.PASSWORD } <input type="password" name="Password" onChange={this.handleOnChangePassword}/> <br />
-						<button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
-						<button type="button" className="btn btn-link">{ REGISTRATION_FIELDS.CANCEL }</button>
+						<div className="fields"><p>{ REGISTRATION_FIELDS.FIRST_NAME }</p> <input type="text" value={this.state.first_name} name="FirstName" onChange={this.handleOnChangeFirstName}/></div>
+						<div className="fields"><p>{ REGISTRATION_FIELDS.LAST_NAME }</p> <input type="text" value={this.state.last_name} name="LastName" onChange={this.handleOnChangeLastName}/></div>
+						<div className="fields"><p>{ COMMON_FIELDS.USER_NAME }</p> <input type="text" value={this.state.user_name} name="Username" onChange={this.handleOnChangeUserName}/></div>
+						<div className="fields"><p>{ COMMON_FIELDS.PASSWORD }</p> <input type="password" value={this.state.password} name="Password" onChange={this.handleOnChangePassword}/></div>
+						<div className="buttons"><button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
+						<button type="button" onClick={this.handleOnCancel} className="btn btn-link">{ REGISTRATION_FIELDS.CANCEL }</button></div>
 					</div>
 				</form>
 				{ register && <Message message={REGISTRATION_MESSAGE} /> }
 			</div>
+			: <Login />
 		)
 	}
 }
