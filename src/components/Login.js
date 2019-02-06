@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-// import { Route, NavLink , Redirect} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import LoginService from '../services/LoginService';
-import Registration from './Registration';
 import Message from '../elements/Message';
 import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE } from '../MessageBundle';
 
@@ -57,27 +55,33 @@ export default class Login extends Component {
 
 	onRegister() {
 		this.setState({
-			login: true
+			login: true //no use
 		});
 	}
 
 	render() {
-		const { login, loginSuccess } = this.state;
+		const { loginSuccess } = this.state;
 
 		return (
-			!login ? <div className="Login">
+			 <div className="Login">
 				<h1>{ LOGIN_FIELDS.LOGIN_HEADING }</h1>
 				<form onSubmit={this.onSubmit}>
 					<div>
-						<div className="fields"><p>{ COMMON_FIELDS.USER_NAME }</p> <input type="text" name="Username" onChange={this.handleOnChangeUserName}/></div>
-						<div className="fields"><p>{ COMMON_FIELDS.PASSWORD }</p> <input type="password" name="Password" onChange={this.handleOnChangePassword}/></div>
-						<div className="buttons"><button type="button" onClick={this.onSubmit} className="btn btn-primary">{ LOGIN_FIELDS.LOGIN }</button>
-						<button type="button" onClick={this.onRegister} className="btn btn-link">{ REGISTRATION_FIELDS.REGISTER }</button></div>
+						<div className="fields">
+							<p>{ COMMON_FIELDS.USER_NAME }</p>
+							<input type="text" name="Username" onChange={this.handleOnChangeUserName}/>
+						</div>
+						<div className="fields">
+							<p>{ COMMON_FIELDS.PASSWORD }</p>
+							<input type="password" name="Password" onChange={this.handleOnChangePassword}/></div>
+						<div className="buttons">
+							<button type="button" onClick={this.onSubmit} className="btn btn-primary">{ LOGIN_FIELDS.LOGIN }</button>
+							<Link to="/register">{ REGISTRATION_FIELDS.REGISTER }</Link>
+						</div>
 					</div>
 				</form>
 				{ loginSuccess && <Message message={LOGIN_MESSAGE} /> }
 				</div>
-				:	<Registration />
 			);
 		}
 }

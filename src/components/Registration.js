@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import RegistrationService from '../services/RegistrationService';
-import Login from './Login';
 import Message from '../elements/Message';
-import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE, COMMON_FIELDS } from '../MessageBundle';
+import Error from '../elements/Error';
+import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE, COMMON_FIELDS, ERROR_IN_REGISTRATION } from '../MessageBundle';
 
 export default class Registration extends Component {
 	constructor(props) {
@@ -13,7 +14,6 @@ export default class Registration extends Component {
 		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
 		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
-		this.handleOnCancel = this.handleOnCancel.bind(this);
 
 		this.state = {
 			first_name: '',
@@ -21,7 +21,7 @@ export default class Registration extends Component {
 			user_name: '',
 			password: '',
 			register: false,
-			cancel: false
+			error: false
 		}
 	}
 
@@ -67,21 +67,17 @@ export default class Registration extends Component {
 					user_name: '',
 					password: '',
 					register: true,
-					cancel: false
+					error: false
 				});
-			}
-		}
-
-		handleOnCancel(e) {
-			this.setState({
-				cancel: true
+			} else this.setState({
+				error: true //no use
 			})
 		}
 
 	render() {
-		const { register, cancel } = this.state;
+		const { register, error } = this.state;
+
 		return (
-			!cancel ?
 			<div className="Registration">
 				<h1>{ REGISTRATION_FIELDS.REGISTRATION_HEADING }</h1>
 				<form onSubmit={this.onSubmit}>
@@ -91,12 +87,12 @@ export default class Registration extends Component {
 						<div className="fields"><p>{ COMMON_FIELDS.USER_NAME }</p> <input type="text" value={this.state.user_name} name="Username" onChange={this.handleOnChangeUserName}/></div>
 						<div className="fields"><p>{ COMMON_FIELDS.PASSWORD }</p> <input type="password" value={this.state.password} name="Password" onChange={this.handleOnChangePassword}/></div>
 						<div className="buttons"><button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
-						<button type="button" onClick={this.handleOnCancel} className="btn btn-link">{ REGISTRATION_FIELDS.CANCEL }</button></div>
+						<Link to="/login">{ REGISTRATION_FIELDS.CANCEL }</Link></div>
 					</div>
 				</form>
+				{ error && <Error message={ERROR_IN_REGISTRATION} /> }
 				{ register && <Message message={REGISTRATION_MESSAGE} /> }
 			</div>
-			: <Login />
 		)
 	}
 }
