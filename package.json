@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "0.18.0",
-    "bootstrap": "3",
+    "bootstrap": "3.3.5",
     "express": "4.16.4",
     "react": "16.7.0",
     "react-dom": "16.7.0",
