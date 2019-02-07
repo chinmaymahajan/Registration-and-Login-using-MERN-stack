@@ -3,7 +3,7 @@ export const REGISTRATION_FIELDS = {
 	LAST_NAME : 'Last Name',
 	REGISTER: 'Register',
 	CANCEL: 'Cancel',
-	REGISTRATION_HEADING: 'Registration'
+	REGISTRATION_HEADING: 'Sign Up'
 }
 
 export const REGISTRATION_MESSAGE = 'Registered Successfully';
