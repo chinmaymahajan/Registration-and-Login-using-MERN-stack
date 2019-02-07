@@ -6,6 +6,7 @@
     "axios": "0.18.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "3.4.0",
+    "classnames": "^2.2.6",
     "express": "4.16.4",
     "react": "16.7.0",
     "react-dom": "16.7.0",
