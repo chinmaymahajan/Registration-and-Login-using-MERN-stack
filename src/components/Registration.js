@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import RegistrationService from '../services/RegistrationService';
+import classNames from 'classnames';
+import { UserRegistration, UsernameValidation } from '../services/RegistrationService';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
 import { REGISTRATION_FIELDS, REGISTRATION_MESSAGE, COMMON_FIELDS, ERROR_IN_REGISTRATION } from '../MessageBundle';
@@ -14,6 +15,7 @@ export default class Registration extends Component {
 		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
 		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.handleOnBlur = this.handleOnBlur.bind(this);
 
 		this.state = {
 			first_name: '',
@@ -49,6 +51,21 @@ export default class Registration extends Component {
 		});
 	}
 
+	async handleOnBlur(e) {
+		this.setState({
+			user_name: e.target.value
+		});
+		const data = {
+			user_name: this.state.user_name
+		};
+		const isUsernameTaken = await UsernameValidation(data);
+
+		isUsernameTaken === 204
+		? this.setState({user_name_taken: true})
+		: this.setState({user_name_taken: false});
+
+	}
+
 	async onSubmit(e) {
 
 		e.preventDefault();
@@ -59,7 +76,7 @@ export default class Registration extends Component {
 			password: this.state.password
 		};
 
-		const registerStatus = await RegistrationService(data);
+		const registerStatus = await UserRegistration(data);
 			if(registerStatus === 200) {
 					this.setState({
 					first_name: '',
@@ -76,7 +93,7 @@ export default class Registration extends Component {
 		}
 
 	render() {
-		const { register, error } = this.state;
+		const { register, error, user_name_taken } = this.state;
 
 		return (
 			<div className="Registration">
@@ -93,14 +110,14 @@ export default class Registration extends Component {
 						</div>
 						<div className="fields">
 							<p>{ COMMON_FIELDS.USER_NAME }</p>
-							<input type="text" value={this.state.user_name} name="Username" onChange={this.handleOnChangeUserName} autoComplete="Username" required/>
+							<input type="text" className={classNames({ 'error': user_name_taken })} value={this.state.user_name} name="Username" onBlur={this.handleOnBlur} onChange={this.handleOnChangeUserName} autoComplete="Username" required/>
 						</div>
 						<div className="fields">
 							<p>{ COMMON_FIELDS.PASSWORD }</p>
 							<input type="password" value={this.state.password} name="Password" onChange={this.handleOnChangePassword} autoComplete="password" required/>
 						</div>
 						<div className="buttons">
-							<button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
+							<button type="submit" className="btn btn-primary" disabled={user_name_taken}>{ REGISTRATION_FIELDS.REGISTER }</button>
 							<Link to="/login">{ REGISTRATION_FIELDS.CANCEL }</Link>
 						</div>
 					</div>
