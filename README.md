@@ -1,5 +1,5 @@
 ### Login Screen
-![Login screen](https://github.com/chinmaymahajan/Registration-and-Login-using-MERN-stack/blob/master/images/login.png | height=200)
+![Login screen](./images/login.png =200x100)
 
 ### Sign up Screen
 ![Sign up screen](./images/signup.png)
