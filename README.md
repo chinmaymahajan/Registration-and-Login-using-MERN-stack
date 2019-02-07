@@ -1,3 +1,9 @@
+### Login Screen
+![Login screen](https://github.com/chinmaymahajan/Registration-and-Login-using-MERN-stack/blob/master/images/login.png | height=200)
+
+### Sign up Screen
+![Sign up screen](https://github.com/chinmaymahajan/Registration-and-Login-using-MERN-stack/blob/master/images/signup.png | height=300)
+
 ## UI
 
 In the project directory, you can run:
