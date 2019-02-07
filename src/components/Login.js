@@ -65,11 +65,11 @@ export default class Login extends Component {
 					<div>
 						<div className="fields">
 							<p>{ COMMON_FIELDS.USER_NAME }</p>
-							<input type="text" name="Username" onChange={this.handleOnChangeUserName}/>
+							<input type="text" name="Username" onChange={this.handleOnChangeUserName} autoComplete="Username" required/>
 						</div>
 						<div className="fields">
 							<p>{ COMMON_FIELDS.PASSWORD }</p>
-							<input type="password" name="Password" onChange={this.handleOnChangePassword}/></div>
+							<input type="password" name="Password" onChange={this.handleOnChangePassword} autoComplete="Password" required/></div>
 						<div className="buttons">
 							<button type="button" onClick={this.onSubmit} className="btn btn-primary">{ LOGIN_FIELDS.LOGIN }</button>
 							<Link to="/register">{ REGISTRATION_FIELDS.REGISTER }</Link>

@@ -22,7 +22,7 @@ export default class Registration extends Component {
 			password: '',
 			register: false,
 			error: false
-		}
+		};
 	}
 
 	handleOnChangeFirstName(e) {
@@ -72,7 +72,7 @@ export default class Registration extends Component {
 			} else this.setState({
 				error: true,
 				register: false
-			})
+			});
 		}
 
 	render() {
@@ -83,12 +83,26 @@ export default class Registration extends Component {
 				<h1>{ REGISTRATION_FIELDS.REGISTRATION_HEADING }</h1>
 				<form onSubmit={this.onSubmit}>
 					<div>
-						<div className="fields"><p>{ REGISTRATION_FIELDS.FIRST_NAME }</p> <input type="text" value={this.state.first_name} name="FirstName" onChange={this.handleOnChangeFirstName}/></div>
-						<div className="fields"><p>{ REGISTRATION_FIELDS.LAST_NAME }</p> <input type="text" value={this.state.last_name} name="LastName" onChange={this.handleOnChangeLastName}/></div>
-						<div className="fields"><p>{ COMMON_FIELDS.USER_NAME }</p> <input type="text" value={this.state.user_name} name="Username" onChange={this.handleOnChangeUserName}/></div>
-						<div className="fields"><p>{ COMMON_FIELDS.PASSWORD }</p> <input type="password" value={this.state.password} name="Password" onChange={this.handleOnChangePassword}/></div>
-						<div className="buttons"><button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
-						<Link to="/login">{ REGISTRATION_FIELDS.CANCEL }</Link></div>
+						<div className="fields">
+							<p>{ REGISTRATION_FIELDS.FIRST_NAME }</p>
+							<input type="text" value={this.state.first_name} name="FirstName" onChange={this.handleOnChangeFirstName}/>
+						</div>
+						<div className="fields">
+								<p>{ REGISTRATION_FIELDS.LAST_NAME }</p>
+								<input type="text" value={this.state.last_name} name="LastName" onChange={this.handleOnChangeLastName}/>
+						</div>
+						<div className="fields">
+							<p>{ COMMON_FIELDS.USER_NAME }</p>
+							<input type="text" value={this.state.user_name} name="Username" onChange={this.handleOnChangeUserName} autoComplete="Username" required/>
+						</div>
+						<div className="fields">
+							<p>{ COMMON_FIELDS.PASSWORD }</p>
+							<input type="password" value={this.state.password} name="Password" onChange={this.handleOnChangePassword} autoComplete="password" required/>
+						</div>
+						<div className="buttons">
+							<button type="submit" className="btn btn-primary">{ REGISTRATION_FIELDS.REGISTER }</button>
+							<Link to="/login">{ REGISTRATION_FIELDS.CANCEL }</Link>
+						</div>
 					</div>
 				</form>
 				{ error && <Error message={ERROR_IN_REGISTRATION} /> }
