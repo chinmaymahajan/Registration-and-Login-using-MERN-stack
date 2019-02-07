@@ -1,6 +1,6 @@
 const express = require('express');
 const registrationRoutes = express.Router();
-
+const bcrypt = require('bcryptjs');
 let Registration = require('./schema');
 
 // Registration route
@@ -17,10 +17,14 @@ registrationRoutes.route('/register').post(function (req, res) {
 
 // Login Router
 registrationRoutes.route('/login').post(function (req, res) {
-	Registration.findOne({"user_name": req.body.user_name, "password": req.body.password}, function(err, data) {
-		if(data !== null) res.sendStatus(200);
-		else res.sendStatus(204);
-	});
+	Registration.findOne({user_name: req.body.user_name})
+	.then(user => {
+		if(!user) res.sendStatus(204);
+		else {
+			bcrypt.compare(req.body.password, user.password)
+			.then(passwordMatch => passwordMatch ? res.sendStatus(200) : res.sendStatus(204))
+		}
+	})
 });
 
 // Get allData

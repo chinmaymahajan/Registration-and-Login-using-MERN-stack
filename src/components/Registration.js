@@ -70,7 +70,8 @@ export default class Registration extends Component {
 					error: false
 				});
 			} else this.setState({
-				error: true //no use
+				error: true,
+				register: false
 			})
 		}
 

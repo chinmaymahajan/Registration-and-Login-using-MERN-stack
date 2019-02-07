@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import LoginService from '../services/LoginService';
 import Message from '../elements/Message';
-import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE } from '../MessageBundle';
+import Error from '../elements/Error';
+import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE, ERROR_IN_LOGIN } from '../MessageBundle';
 
 export default class Login extends Component {
 	constructor(props) {
@@ -11,12 +12,11 @@ export default class Login extends Component {
 		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
 		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
-		this.onRegister = this.onRegister.bind(this);
 
 		this.state = {
 			user_name: '',
 			password: '',
-			login: false,
+			error: false,
 			loginSuccess: false
 		}
 	}
@@ -43,24 +43,20 @@ export default class Login extends Component {
 
 		if(loginResult !== 200) {
 			this.setState({
+				error: true,
 				loginSuccess: false
 			});
 		}
 		else {
 			this.setState({
-				loginSuccess: true
+				loginSuccess: true,
+				error: false
 			});
 		}
 	}
 
-	onRegister() {
-		this.setState({
-			login: true //no use
-		});
-	}
-
 	render() {
-		const { loginSuccess } = this.state;
+		const { loginSuccess, error } = this.state;
 
 		return (
 			 <div className="Login">
@@ -81,6 +77,7 @@ export default class Login extends Component {
 					</div>
 				</form>
 				{ loginSuccess && <Message message={LOGIN_MESSAGE} /> }
+				{ error && <Error message={ERROR_IN_LOGIN} />}
 				</div>
 			);
 		}
