@@ -1,5 +1,5 @@
 ### Login Screen
-![Login screen](./images/login.png =200x100)
+![Login screen](./images/login.png)
 
 ### Sign up Screen
 ![Sign up screen](./images/signup.png)
