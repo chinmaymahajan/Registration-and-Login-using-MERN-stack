@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import LoginService from '../services/LoginService';
+import { LoginService, GetData } from '../services/LoginService';
 import Message from '../elements/Message';
+import CurrencyInput from './CurrencyInput';
 import Error from '../elements/Error';
 import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE, ERROR_IN_LOGIN } from '../MessageBundle';
 
@@ -12,6 +13,7 @@ export default class Login extends Component {
 		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
 		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
+		this.getData = this.getData.bind(this);
 
 		this.state = {
 			user_name: '',
@@ -30,6 +32,23 @@ export default class Login extends Component {
 	handleOnChangePassword(e) {
 		this.setState({
 			password: e.target.value
+		});
+	}
+
+	handleUsers(e) {
+		this.setState({
+			currentUsers: {
+				name: e.first_name,
+				id: e._id
+			}
+		});
+		console.log(e.first_name)
+	}
+
+	async getData(e) {
+		const data = await GetData();
+		this.setState({
+			users: data
 		});
 	}
 
@@ -56,7 +75,7 @@ export default class Login extends Component {
 	}
 
 	render() {
-		const { loginSuccess, error } = this.state;
+		const { loginSuccess, error, users } = this.state;
 
 		return (
 			 <div className="Login">
@@ -78,6 +97,9 @@ export default class Login extends Component {
 				</form>
 				{ loginSuccess && <Message message={LOGIN_MESSAGE} /> }
 				{ error && <Error message={ERROR_IN_LOGIN} />}
+				<div> <button type="button" onClick={this.getData} className="btn btn-primary">{ LOGIN_FIELDS.TEST }</button> </div>
+				{users && <div> {users.map(user => (<li onClick={this.handleUsers.bind(this,user)} key={user._id}>{user.first_name}</li>)) }</div>}
+				<CurrencyInput />
 				</div>
 			);
 		}

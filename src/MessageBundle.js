@@ -18,5 +18,6 @@ export const COMMON_FIELDS = {
 
 export const LOGIN_FIELDS = {
 	LOGIN: 'Login',
-	LOGIN_HEADING: 'Login'
+	LOGIN_HEADING: 'Login',
+	TEST: 'Get data'
 }

@@ -16,7 +16,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/registration', registrationRoutes)
+app.use('/registration', registrationRoutes);
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);
 });
