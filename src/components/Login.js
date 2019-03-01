@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import LoginService from '../services/LoginService';
+import { LoginService } from '../services/LoginService';
 import Message from '../elements/Message';
 import Error from '../elements/Error';
 import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE, ERROR_IN_LOGIN } from '../MessageBundle';
@@ -8,10 +8,6 @@ import { COMMON_FIELDS, REGISTRATION_FIELDS, LOGIN_FIELDS, LOGIN_MESSAGE, ERROR_
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
-
-		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
-		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
 
 		this.state = {
 			user_name: '',
@@ -21,19 +17,19 @@ export default class Login extends Component {
 		}
 	}
 
-	handleOnChangeUserName(e) {
+	handleOnChangeUserName = (e) =>  {
 		this.setState({
 			user_name: e.target.value
 		});
 	}
 
-	handleOnChangePassword(e) {
+	handleOnChangePassword = (e) => {
 		this.setState({
 			password: e.target.value
 		});
 	}
 
-	async onSubmit(e) {
+	onSubmit = async e => {
 		const data = {
 			user_name: this.state.user_name,
 			password: this.state.password
@@ -47,12 +43,11 @@ export default class Login extends Component {
 				loginSuccess: false
 			});
 		}
-		else {
+		else
 			this.setState({
 				loginSuccess: true,
 				error: false
 			});
-		}
 	}
 
 	render() {

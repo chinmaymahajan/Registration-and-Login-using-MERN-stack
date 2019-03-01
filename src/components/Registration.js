@@ -10,13 +10,6 @@ export default class Registration extends Component {
 	constructor(props) {
 		super(props);
 
-		this.handleOnChangeFirstName = this.handleOnChangeFirstName.bind(this);
-		this.handleOnChangeLastName = this.handleOnChangeLastName.bind(this);
-		this.handleOnChangeUserName = this.handleOnChangeUserName.bind(this);
-		this.handleOnChangePassword = this.handleOnChangePassword.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
-		this.handleOnBlur = this.handleOnBlur.bind(this);
-
 		this.state = {
 			first_name: '',
 			last_name: '',
@@ -27,31 +20,31 @@ export default class Registration extends Component {
 		};
 	}
 
-	handleOnChangeFirstName(e) {
+	handleOnChangeFirstName = e => {
 		this.setState({
 			first_name: e.target.value
 		});
 	}
 
-	handleOnChangeLastName(e) {
+	handleOnChangeLastName = e => {
 		this.setState({
 			last_name: e.target.value
 		});
 	}
 
-	handleOnChangeUserName(e) {
+	handleOnChangeUserName = e => {
 		this.setState({
 			user_name: e.target.value
 		});
 	}
 
-	handleOnChangePassword(e) {
+	handleOnChangePassword = e => {
 		this.setState({
 			password: e.target.value
 		});
 	}
 
-	async handleOnBlur(e) {
+	handleOnBlur = async e => {
 		this.setState({
 			user_name: e.target.value
 		});
@@ -66,7 +59,7 @@ export default class Registration extends Component {
 
 	}
 
-	async onSubmit(e) {
+	onSubmit = async e => {
 
 		e.preventDefault();
 		const data = {
