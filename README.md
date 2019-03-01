@@ -1,3 +1,9 @@
+### Login Screen
+![Login screen](./images/login.png)
+
+### Sign up Screen
+![Sign up screen](./images/signup.png)
+
 ## UI
 
 In the project directory, you can run:
