@@ -2,7 +2,7 @@ const express = require('express');
 const registrationRoutes = express.Router();
 const bcrypt = require('bcryptjs');
 let Registration = require('./schema');
-let RouteNames = require('../constants/constants');
+let RouteNames = require('./ServerConstants');
 // Registration route
 registrationRoutes.route(RouteNames.register).post(function(req, res) {
     let register = new Registration(req.body);
