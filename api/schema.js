@@ -13,7 +13,6 @@ let Registration = new Schema({
         type: String,
         match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
         required: [true, "can't be blank"]
-
     },
     user_name: {
         type: String,
