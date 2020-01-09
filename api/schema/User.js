@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// collection and schema for Registration
-let Registration = new Schema({
+//SECTION  collection and schema for Registration
+let UserSchema = new Schema({
     first_name: {
         type: String,
         match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
@@ -28,7 +28,7 @@ let Registration = new Schema({
         trim: true
     }
 }, {
-    collection: 'Registration'
+    collection: 'User'
 });
 
-module.exports = mongoose.model('Registration', Registration);
+module.exports = mongoose.model('User', UserSchema);
