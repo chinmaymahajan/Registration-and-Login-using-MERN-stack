@@ -10,7 +10,6 @@ import {
   LOGIN_MESSAGE,
   ERROR_IN_LOGIN,
 } from '../MessageBundle';
-import { register } from '../ClientConstants/ClientConstants';
 
 export default class Login extends Component {
   constructor(props) {
@@ -59,11 +58,11 @@ export default class Login extends Component {
 
     return (
       <div className="Login">
-        <h1> {LOGIN_FIELDS.LOGIN_HEADING} </h1>  {' '}
+        <h1> {LOGIN_FIELDS.LOGIN_HEADING} </h1> {' '}
         <form onSubmit={this.onSubmit}>
           <div>
             <div className="fields">
-              <p> {COMMON_FIELDS.USER_NAME} </p>  {' '}
+              <p> {COMMON_FIELDS.USER_NAME} </p>    {' '}
               <input
                 type="text"
                 name="Username"
@@ -72,10 +71,10 @@ export default class Login extends Component {
                 required
               />
             </div>{' '}
-              {' '}
+            {' '}
             <div className="fields">
               {' '}
-                <p> {COMMON_FIELDS.PASSWORD} </p>  {' '}
+              <p> {COMMON_FIELDS.PASSWORD} </p>    {' '}
               <input
                 type="password"
                 name="Password"
@@ -83,28 +82,29 @@ export default class Login extends Component {
                 autoComplete="Password"
                 required
               />{' '}
-                {' '}
+                  {' '}
             </div>{' '}
-              {' '}
+            {' '}
             <div className="buttons">
               {' '}
-               {' '}
               <button
                 type="button"
                 onClick={this.onSubmit}
                 className="btn btn-primary"
               >
                 {' '}
-                  {LOGIN_FIELDS.LOGIN}  {' '}
+                  {LOGIN_FIELDS.LOGIN}    {' '}
               </button>{' '}
-               <Link to={register}> {REGISTRATION_FIELDS.REGISTER} </Link>    {' '}
+                  <Link to="/register">
+                     {REGISTRATION_FIELDS.REGISTER} </Link>  {' '}
+               {' '}
             </div>{' '}
                {' '}
           </div>{' '}
-            {' '}
+           {' '}
         </form>{' '}
-          {loginSuccess && <Message message={LOGIN_MESSAGE} />}  {' '}
-        {error && <Error message={ERROR_IN_LOGIN} />}  {' '}
+            {loginSuccess && <Message message={LOGIN_MESSAGE} />}    {' '}
+        {error && <Error message={ERROR_IN_LOGIN} />}    {' '}
       </div>
     );
   }
